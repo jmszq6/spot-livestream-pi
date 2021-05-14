@@ -43,9 +43,26 @@ We wanted to use the pi as TURN server so that our AWS instance could have a pat
 Luckily for us, Mizzou Robotics offered to let us borrow their Jetson Nano 2gb, which is a similar size to the pi and could be just as easily mounted on to spot.
 
 ## Using Jetson Nano 2GB to Stream to Twitch From Spot ##
-### Requirements: Jetson Nano 2GB, USB WiFi adapter, MicroSD card + writer, 5V 2A power to Jetson, ethernet cable, Twitch account ###
+### Requirements: Jetson Nano 2GB, USB WiFi adapter, UHS MicroSD card + writer, 5V 3A power to Jetson, ethernet cable, Twitch account ###
 
 #### Theoretical workflow considering we also ran into dumb issues with this ####
+
+Write Jetson Nano 2GB image to microSD card by following Nvidia documentation:
+https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-2gb-devkit#write
+
+Connect USB Wifi adapter and install drivers (required because we will be networked to Spot via ethernet to get the WebRTC stream and using the WiFi adapter to be connected to the internet)
+
+Install apache on the nano (requirement to locally host our WebRTC client which will retrieve the livestream from Spot's cam server)
+
+'''
+sudo apt-get update
+'''
+'''
+sudo apt-get install apache2
+'''
+
+
+
 
 
 
