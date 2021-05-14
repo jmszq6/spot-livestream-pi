@@ -42,3 +42,11 @@ We wanted to use the pi as TURN server so that our AWS instance could have a pat
 
 Luckily for us, Mizzou Robotics offered to let us borrow their Jetson Nano 2gb, which is a similar size to the pi and could be just as easily mounted on to spot.
 
+## Using Jetson Nano 2GB to Stream to Twitch From Spot ##
+### Requirements: Jetson Nano 2GB, USB WiFi adapter, MicroSD card + writer, 5V 2A power to Jetson, ethernet cable, Twitch account ###
+
+####Theoretical workflow considering we also ran into dumb issues with this ####
+
+
+
+
