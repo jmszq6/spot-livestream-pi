@@ -60,6 +60,18 @@ Install apache on the nano (requirement to locally host our WebRTC client which 
 
 Host the webrtc.html locally so it can be accessed via loaclhost (127.0.0.1) (this file will authenticate to spot's cam server and host a video feed)
 
+Install the Nvidia FFMPEG package which supports GPU accelerated decoding
+> sudo apt install ffmpeg
+
+To get source files for the ffmpeg package
+> apt source ffmpeg
+
+To include the ffmpeg library in L4T builds
+1.Add the following lines to /etc/apt/sources.list:
+$ echo "deb https://repo.download.nvidia.com/jetson/ffmpeg main main" |  sudo tee -a /etc/apt/sources.list
+$ echo "deb-src https://repo.download.nvidia.com/jetson/ffmpeg main main" |  sudo tee -a /etc/apt/sources.list
+2.Enter the command:
+> sudo apt update
 
 
 
