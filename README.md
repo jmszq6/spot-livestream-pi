@@ -54,13 +54,9 @@ Connect USB Wifi adapter and install drivers (required because we will be networ
 
 Install apache on the nano (requirement to locally host our WebRTC client which will retrieve the livestream from Spot's cam server)
 
-'''
 sudo apt-get update
-'''
 
-'''
 sudo apt-get install apache2
-'''
 
 
 
