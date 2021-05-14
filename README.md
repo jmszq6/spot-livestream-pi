@@ -73,6 +73,16 @@ $ echo "deb-src https://repo.download.nvidia.com/jetson/ffmpeg main main" |  sud
 2.Enter the command:
 > sudo apt update
 
+Create a twitch account and locate your unique stream key from the dashboard
+
+Select one of the following twitch ingest endpoints:
+#### US East: Chicago, IL (3) rtmp://ord03.contribute.live-video.net/app/{stream_key} ####
+#### US Central: Dallas, TX rtmp://dfw.contribute.live-video.net/app/{stream_key} ####
+#### US East: Chicago, IL (2) rtmp://ord02.contribute.live-video.net/app/{stream_key} ####
+
+A list of 10 servers can be found here: https://stream.twitch.tv/ingests/
+
+
 
 
 
