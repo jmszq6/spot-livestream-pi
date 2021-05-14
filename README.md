@@ -45,7 +45,7 @@ Luckily for us, Mizzou Robotics offered to let us borrow their Jetson Nano 2gb, 
 ## Using Jetson Nano 2GB to Stream to Twitch From Spot ##
 ### Requirements: Jetson Nano 2GB, USB WiFi adapter, MicroSD card + writer, 5V 2A power to Jetson, ethernet cable, Twitch account ###
 
-####Theoretical workflow considering we also ran into dumb issues with this ####
+#### Theoretical workflow considering we also ran into dumb issues with this ####
 
 
 
