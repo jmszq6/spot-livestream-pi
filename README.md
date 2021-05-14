@@ -80,7 +80,7 @@ Select one of the following twitch ingest endpoints:
 #### US Central: Dallas, TX rtmp://dfw.contribute.live-video.net/app/{stream_key} ####
 #### US East: Chicago, IL (2) rtmp://ord02.contribute.live-video.net/app/{stream_key} ####
 
-A list of 10 servers can be found here: https://stream.twitch.tv/ingests/
+A list of 10 servers can be found here, select the one closest to you: https://stream.twitch.tv/ingests/
 
 
 
