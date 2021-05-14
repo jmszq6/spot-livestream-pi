@@ -58,6 +58,8 @@ Install apache on the nano (requirement to locally host our WebRTC client which 
 
 > sudo apt-get install apache2
 
+Host the webrtc.html locally so it can be accessed via loaclhost (127.0.0.1) (this file will authenticate to spot's cam server and host a video feed)
+
 
 
 
