@@ -1,5 +1,7 @@
 # spot-livestream-pi
 
+Code in repo intended to integrate with ffmpeg and Spot control (via twitch chat) once problems encountered are fixed.
+
 ## Background Info and Unsuccessful Attempts with the Pi ##
 
 Research was focused on planning and implementing "on the fly" Spot livestreaming capabilities to Twitch servers. This means, rather than having a dedicated laptop/workstation have to follow around Spot, a small device could be mounted to Spot and triggered for immediate livestreaming to www.twitch.tv servers.
