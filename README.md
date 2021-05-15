@@ -65,8 +65,7 @@ Install apache on the nano (requirement to locally host our WebRTC client which 
 Set up routing tables so all calls to Spot's IP range route through the wired network interface and everything else goes through the USB adapter
 
 Edit webrtc.html file to include your spot username and password (this bypassses the default spot requirement to enter your username and password on the webpage)
->     xhr.send(JSON.stringify({username: "spotUsername",
-                             password: "spotPassword"}));
+>     xhr.send(JSON.stringify({username: "spotUsername", password: "spotPassword"}));
 
 Host the webrtc.html locally so it can be accessed via loaclhost (127.0.0.1) (this file will authenticate to spot's cam server and host a video feed)
 
