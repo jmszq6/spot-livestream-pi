@@ -60,6 +60,8 @@ Install apache on the nano (requirement to locally host our WebRTC client which 
 
 > sudo apt-get install apache2
 
+Set up routing tables so all calls to Spot's IP range route through the wired network interface and everything else goes through the USB adapter
+
 Host the webrtc.html locally so it can be accessed via loaclhost (127.0.0.1) (this file will authenticate to spot's cam server and host a video feed)
 
 Install the Nvidia FFMPEG package which supports GPU accelerated decoding
