@@ -84,9 +84,38 @@ Select one of the following twitch ingest endpoints:
 
 A list of 10 servers can be found here, select the one closest to you: https://stream.twitch.tv/ingests/
 
+FFMPEG to twitch ingest endpoint using the file we are hosting at 127.0.0.1 as the input and our ingest endpoint as the output file.
+
+Reference the following document for selecting the proper ffmpeg settings for RTMP.
+https://trac.ffmpeg.org/wiki/EncodingForStreamingSites
 
 
+## Problems encountered ##
+While transmuxing still needed to be tested using the pi (which may work by avoiding the decoding process altogether), we switched to using the Jetson Nano 2gb as we thought it had better hardware capabilities for this project and would inevitibly be used with Spot at some point in the future for other projects.
 
+While we did not have a Nano on hand, MURobotics was nice enough to let us use theirs as long as it stayed locked in Dale's office.
+However, even after many many hours of debugging and consulting outside help, we could not actually get the Nano to properly boot.
+What we experienced was that upon giving it the proper power via micro-usb and inserting the MicroSD card with the Jetson image on it, it would simply boot to the Nvidia splash screen and then either bootloop and stay frozen on the splash screen.
 
+We did a lot of research on why this was happening (this is actually a super common problem with these boards) and concluded it was likely due to one of three scenarios and tried all combinations of the following:
 
+1) Problems with the MicroSD card (many users suggested they tried with up to 7 MicroSD cards and were only able to boot off of one of them)
+    ### Sandisk Edge 16 GB ###
+    ### Kingston 32 GB ###
 
+2) Problems with the image we were using on the card (we tried several different versions straight from the Nvidia website specifically for the Nano 2GB)
+    ### Jetson Nano 2GB Developer Kit SD Card Image 2021/02/24 4.5.1 (https://developer.nvidia.com/jetson-nano-2gb-sd-card-image) ###
+    ### Jetson Nano 2GB Developer Kit SD Card Image 2021/01/21 4.5 (https://developer.nvidia.com/jetson-nano-2gb-sd-card-image-45) ###
+    ### Jetson Nano 2GB Developer Kit SD Card Image 2020/10/21 4.4.1 (https://developer.nvidia.com/jetson-nano-2gb-jp441-sd-card-image) ###
+
+3) Various power supplies ranging from 5V 2A to 5V 4A (many users noted increasing 2-3A up to 4A solved this issue, it did not for us)
+
+We concluded that the board is either killed or we need to more various SD cards (we didn't have any more available).
+Doing a quick google search reveals many hundreds of users experiencing the same exact problem as us. We attempted all solutions.
+
+https://forums.developer.nvidia.com/t/nvidia-splash-screen-frozen/72000
+https://forums.developer.nvidia.com/t/jetson-nano-2gb-stuck-on-boot-screen-with-nvidia-logo/169601
+https://forums.balena.io/t/stuck-at-boot-menu-with-jetson-nano/236429
+... and many more.
+
+Due to these issues, the workflow posted under the Nano section is completely theoretical and untested. We plan to use our free time this summer and next semester to test out transmuxing on the pi and solving the problem with the Nano so that we can fully implement on the fly livestreaming from Spot and integrate it into other students' work.
