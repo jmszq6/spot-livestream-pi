@@ -1,0 +1,151 @@
+
+
+<html>
+<style>
+#eyesonvideo {
+  min-width: 100%;
+  object-fit: contain;
+}
+</style>
+<body onload="auth()">
+<div id="authwindow">
+    Username: <input id="username" type="text"></input><br>
+    Password: <input id="password" type="password"></input><br>
+    <button onclick="auth()">Connect</button>
+</div>
+<div id="failwindow" style="display:none">
+FAILED TO CONNECT
+</div>
+<div id="vidwindow" style="display:none">
+<video id="eyesonvideo" autoplay muted></video>
+<audio id="eyesonaudio" autoplay></audio>
+</div>
+</body>
+<script src="rtcsignal.js"></script>
+<script>
+function connectvideo(token) {
+  return new Promise(function(resolve, reject) {
+    log=console.log
+
+    let pc = new RTCPeerConnection({
+        iceServers: []
+    })
+    getoffer("/h264.sdp", token).then(function (o) {
+        pc.setRemoteDescription(o)
+        offer = o
+        try {
+            navigator.mediaDevices.getUserMedia({audio: true, video: false})
+            .then(function(stream) {
+                pc.addStream(stream)
+                tracks = stream.getAudioTracks()
+                tracks.forEach(function (track, index) {
+                    track.enabled = false
+                })
+                {
+                    var el = document.getElementById('eyesonvideo')
+                    el.onmousedown = function() {
+
+                        var tracks = stream.getAudioTracks()
+
+                        var el = document.getElementById('eyesonaudio')
+                        el.muted = true;
+                        tracks.forEach(function (track, index) {
+                            track.enabled = true
+                        })
+                    }
+
+                    el.onmouseup = function() {
+                        var tracks = stream.getAudioTracks()
+                        var el = document.getElementById('eyesonaudio')
+                        el.muted = false;
+                        tracks.forEach(function (track, index) {
+                            track.enabled = false
+                        })
+                    }
+                }
+
+                pc.createAnswer().then(function(answer) {
+                    pc.setLocalDescription(answer);
+                })
+            })
+        }
+        catch(err) {
+            if (err.name == "TypeError") {
+                pc.createAnswer().then(function(answer) {
+                    pc.setLocalDescription(answer);
+                })
+            }
+            console.log(err)
+            console.log("Very likely, chrome is blocking the mic because of SSL related security reasons. Disable PTT.");
+        }
+
+
+
+        pc.onicecandidate = event => {
+          if (event.candidate == null) {
+            log(pc.localDescription.sdp)
+            offer.postanswer(pc.localDescription)
+          }
+          else {
+            log("ICE CANDIDATE: " + event.candidate + " foundation " + JSON.stringify(event.candidate.toJSON()))
+          }
+        }
+
+        pc.onsignalingstatechange = function(event) {
+          log("SIGNALING STATE " + pc.signalingState)
+        }
+
+
+        pc.ontrack = event => {
+          log("ADDING TRACK " + event.track.kind)
+          if (event.track.kind == "video") {
+            var el = document.getElementById('eyesonvideo')
+            el.srcObject = event.streams[0]
+            el.autoplay = true
+            el.controls = false
+          }
+          if (event.track.kind == "audio") {
+            var el = document.getElementById('eyesonaudio')
+            el.srcObject = event.streams[0]
+            el.autoplay = true
+            el.controls = false
+          }
+        }
+        resolve()
+    })
+    .catch(e => {
+        log("OFFER FAIL " + e)
+        reject(e)
+    })
+  })
+}
+
+function auth() {
+    document.getElementById('authwindow').style.display="none"
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "192.168.80.3:31102/h264.sdp.html/auth", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var j = JSON.parse(this.responseText)
+            connectvideo(j.token).then(e => {
+                console.log("CONNECTED")
+                document.getElementById('vidwindow').style.display="block"
+            })
+            .catch(e => {
+                console.log("FAILED RESPONSE " + e)
+                document.getElementById('failwindow').style.display="block"
+            })
+          }
+          else {
+            console.log("Got Response " + xhr.status)
+            document.getElementById('failwindow').style.display="block"
+          }
+        }
+    }
+    xhr.send(JSON.stringify({username: "spotUsername",
+                             password: "spotPassword"}));
+}
+</script>
+</html>
